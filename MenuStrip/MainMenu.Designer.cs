@@ -1,6 +1,6 @@
 ﻿namespace MenuStrip
 {
-    partial class Form1
+    partial class MainMenu
     {
         /// <summary>
         ///  Required designer variable.
@@ -33,21 +33,24 @@
             // 
             // menuStrip
             // 
+            menuStrip.ImageScalingSize = new Size(20, 20);
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(800, 24);
+            menuStrip.Padding = new Padding(7, 3, 0, 3);
+            menuStrip.Size = new Size(914, 24);
             menuStrip.TabIndex = 0;
             menuStrip.Text = "menuStrip1";
             // 
-            // Form1
+            // MainMenu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(menuStrip);
             MainMenuStrip = menuStrip;
-            Name = "Form1";
-            Text = "Form1";
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "MainMenu";
+            Text = "MainMenu";
             ResumeLayout(false);
             PerformLayout();
         }
