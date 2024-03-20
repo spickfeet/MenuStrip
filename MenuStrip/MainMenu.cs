@@ -16,8 +16,14 @@ namespace MenuStrip
         {
             InitializeComponent();
 
-            ParserMenu parser = new ParserMenu("menuConfig.txt");
-            _menuConfig = parser.Parse();
+            ParserMenu parserMenu = new ParserMenu("menuConfigs.txt");
+            IList<string[]> menuConfig = parserMenu.Parse();
+
+            ParserUser parserUser = new ParserUser("usersConfig.txt");
+            IList<IUser> users = parserUser.Parse();
+
+            ParserUserMenu parserUserMenu = new ParserUserMenu(users[2].Configs, menuConfig);
+            _menuConfig = parserUserMenu.Parse();
 
             Init();
         }

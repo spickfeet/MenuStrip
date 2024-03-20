@@ -16,7 +16,7 @@ namespace MenuStrip.Parsers
             
             if (!File.Exists(pathConfig)) { throw new Exception("File Users non existent"); }
 
-            this._pathConfig = pathConfig;
+            _pathConfig = pathConfig;
         }
 
 
@@ -29,16 +29,20 @@ namespace MenuStrip.Parsers
                 IList<string> list = new List<string>();
                 list.Add(streamReader.ReadLine());//отсутствие проверок. Обязательно должен быть соблюден строгий формат
 
+                IUser user = new User();
+                string str = "";
+                string[] logAndPas;
+
                 while (!streamReader.EndOfStream)
                 {
-                    string str = streamReader.ReadLine(); //формат
+                    str = streamReader.ReadLine(); //формат
 
                     if (str.StartsWith('#')) //формат
                     {
-                        IUser user = new User();
+                        user = new User();
 
-                        string[] logAndPas = list[0].Split(' ');
-                        user.Login = logAndPas[0];
+                        logAndPas = list[0].Split(' ');
+                        user.Login = logAndPas[0].Remove(0, 1);
                         user.Password = logAndPas[1];
 
                         for (int i = 1; i < list.Count; i++) // формат
@@ -49,12 +53,27 @@ namespace MenuStrip.Parsers
 
                         listUsers.Add(user);
                         list.Clear();
+                        list.Add(str);
                     }
                     else
                     {
                         list.Add(str);
                     }
                 }
+
+                user = new User();
+
+                logAndPas = list[0].Split(' ');
+                user.Login = logAndPas[0].Remove(0, 1);
+                user.Password = logAndPas[1];
+
+                for (int i = 1; i < list.Count; i++) // формат
+                {
+                    string[] configUser = list[i].Split(' ');
+                    user.Configs.Add(configUser[0], int.Parse(configUser[1]));
+                }
+
+                listUsers.Add(user);
             }
 
             return listUsers;

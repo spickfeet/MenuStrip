@@ -12,6 +12,6 @@ namespace MenuStrip.Users
 
         public string Password { get; set; }
 
-        public IDictionary<string, int> Configs { get; set; }
+        public IDictionary<string, int> Configs { get; set; } = new Dictionary<string, int>();
     }
 }
