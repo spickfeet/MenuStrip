@@ -19,7 +19,7 @@ namespace ProgPR2
     {
         private IList<IUser> _users = new List<IUser>();
         private IUser _currentUser;
-        private ParserUser _userParser = new("");
+        private ParserUser _userParser = new("usersConfig.txt");
         System.Windows.Forms.Timer timer1;
         public LogInForm()
         {
@@ -105,8 +105,8 @@ namespace ProgPR2
             if (LogIn())
             {
                 MainMenu mainMenu = new MainMenu(_currentUser.Configs);
-                this.Hide();
-                ShowDialog(mainMenu);
+                Hide();
+                mainMenu.ShowDialog();
             }
             else
             {

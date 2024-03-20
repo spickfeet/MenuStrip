@@ -12,26 +12,50 @@ namespace MenuStrip
         {
             return "Others";
         }
+
         public string Stuff()
         {
             return "Stuff";
         }
+
         public string Orders()
         {
             return "Orders";
         }
+
         public string Docs()
         {
             return "Docs";
         }
+
         public string Departs()
         {
             return "Departs";
         }
+
         public string Towns()
         {
             return "Towns";
         }
 
+        public string Posts()
+        {
+            return "Posts";
+        }
+
+        public string Window()
+        {
+            return "Window";
+        }
+
+        public string Content()
+        {
+            return "Content";
+        }
+
+        public string About()
+        {
+            return "About";
+        }
     }
 }
