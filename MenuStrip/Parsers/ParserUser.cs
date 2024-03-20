@@ -5,41 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using MenuStrip.Users;
 
-namespace MenuStrip.Parser
+namespace MenuStrip.Parsers
 {
-    public class Parser
+    public class ParserUser
     {
-        public Parser(string pathMenu, string pathUsers)
+        private string _pathConfig;
+
+        public ParserUser(string pathConfig)
         {
-            if (!File.Exists(pathMenu)) { throw new Exception("File Menu non existent"); }
-            if (!File.Exists(pathUsers)) { throw new Exception("File Users non existent"); }
+            
+            if (!File.Exists(pathConfig)) { throw new Exception("File Users non existent"); }
 
-            this.pathMenu = pathMenu;
-            this.pathUsers = pathUsers;
-        }
-
-        private string pathMenu;
-
-        private string pathUsers;
-
-        public IList<string[]> ParseMenu()
-        {
-            IList<string[]> strings = new List<string[]>();
-
-            using (StreamReader streamReader = new StreamReader(pathMenu))
-            {
-                for (int i = 0; !streamReader.EndOfStream; i++) { strings.Add(streamReader.ReadLine().Split(' ')); }
-            }
-
-            return strings;
+            this._pathConfig = pathConfig;
         }
 
 
-        public IList<IUser> ParseUsers()
+        public IList<IUser> Parse()
         {
             IList<IUser> listUsers = new List<IUser>();
 
-            using (StreamReader streamReader = new StreamReader(pathUsers))
+            using (StreamReader streamReader = new StreamReader(_pathConfig))
             {
                 IList<string> list = new List<string>();
                 list.Add(streamReader.ReadLine());//отсутствие проверок. Обязательно должен быть соблюден строгий формат
