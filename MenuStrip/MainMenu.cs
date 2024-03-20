@@ -6,20 +6,21 @@ namespace MenuStrip
     {
         private MenuMethods _menuMethods = new();
         private ConfigRepository _configRepository = new ConfigRepository();
+        private List<string[]> _configs = new List<string[]>();
         private Dictionary<string, string> _methods = new Dictionary<string, string>();
 
         public MainMenu()
         {
             InitializeComponent();
-            
-            Init(_configRepository.GetConfigs());
+            _configs = _configRepository.GetConfigs();
+            Init();
         }
 
-        private void Init(List<string[]> configs)
+        private void Init()
         {
             ToolStripMenuItem prevItem = new();
           
-            foreach (string[] elementConfig in configs)
+            foreach (string[] elementConfig in _configs)
             {
                 ToolStripMenuItem Item = new(elementConfig[1]);
 
