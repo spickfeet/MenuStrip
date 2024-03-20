@@ -7,17 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using MenuStrip.Users;
+using MenuStrip;
+using Microsoft.VisualBasic.ApplicationServices;
+using MenuStrip.Parsers;
 
 
 namespace ProgPR2
 {
     public partial class LogInForm : Form
     {
-        System.Windows.Forms.Timer timer1;  
+        private IList<IUser> _users = new List<IUser>();
+        private IUser _currentUser;
+        private ParserUser _userParser = new("");
+        System.Windows.Forms.Timer timer1;
         public LogInForm()
         {
             InitializeComponent();
-
+            _users = _userParser.Parse();
             timer1 = new System.Windows.Forms.Timer();
             this.timer1.Enabled = true;
             this.timer1.Interval = 100;
@@ -77,7 +84,34 @@ namespace ProgPR2
             {
                 labelLanguage.Text = "Язык ввода английский";
             }
-            labelCapsStatus.Text = Console.CapsLock ? "Клавишка CapsLock нажата" : "";
+            labelCapsStatus.Text = Console.CapsLock ? "Клавиша CapsLock нажата" : "";
+        }
+
+        public bool LogIn()
+        {
+            foreach (IUser user in _users)
+            {
+                if (user.Password == textBoxPassword.Text && user.Login == textBoxLogin.Text)
+                {
+                    _currentUser = user;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void buttonLogIn_Click(object sender, EventArgs e)
+        {
+            if (LogIn())
+            {
+                MainMenu mainMenu = new MainMenu(_currentUser.Configs);
+                this.Hide();
+                ShowDialog(mainMenu);
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль!!!!!!!!!!!!!!!");
+            }
         }
     }
 }
