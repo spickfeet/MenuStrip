@@ -12,7 +12,7 @@ namespace MenuStrip.Parsers
 
         public ParserMenu(string pathConfig)
         {
-            if (!File.Exists(_pathConfig)) throw new Exception("File Menu non existent"); 
+            if (!File.Exists(pathConfig)) throw new Exception("File Menu non existent"); 
 
             _pathConfig = pathConfig;
         }
@@ -24,7 +24,7 @@ namespace MenuStrip.Parsers
 
             using (StreamReader streamReader = new StreamReader(_pathConfig))
             {
-                for (int i = 0; !streamReader.EndOfStream; i++) { strings.Add(streamReader.ReadLine().Split(' ')); }
+                while (!streamReader.EndOfStream) { strings.Add(streamReader.ReadLine().Split(' ')); }
             }
 
             return strings;
