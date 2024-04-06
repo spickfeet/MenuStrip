@@ -38,15 +38,14 @@ namespace MenuStrip
 
             while (i <= _menuConfig.Count - 1 && levelIndex == Convert.ToInt32(_menuConfig[i][0]))
             {
-                if (_menuConfig[i][2] == "2")
-                {
-                    i++;
-                    continue;
-                }
 
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(_menuConfig[i][1]);
 
                 parentItem.DropDownItems.Add(menuItem);
+                if (_menuConfig[i][2] == "2")
+                {
+                    menuItem.Visible = false;
+                }
 
                 if (_menuConfig[i][2] == "1")
                 {

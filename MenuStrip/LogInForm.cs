@@ -29,7 +29,6 @@ namespace ProgPR2
             this.timer1.Enabled = true;
             this.timer1.Interval = 100;
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
-            timer1.Stop();
 
             this.TopMost = true;
         }
@@ -75,12 +74,12 @@ namespace ProgPR2
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            Text = GetKeyboardLayoutId();
-            if (Text == "RUS")
+            string lg = GetKeyboardLayoutId();
+            if (lg == "RUS")
             {
                 labelLanguage.Text = "Язык ввода русский";
             }
-            if (Text == "ENU")
+            if (lg == "ENU")
             {
                 labelLanguage.Text = "Язык ввода английский";
             }
@@ -112,6 +111,11 @@ namespace ProgPR2
             {
                 MessageBox.Show("Неверный логин или пароль!!!!!!!!!!!!!!!");
             }
+        }
+
+        private void LogInForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

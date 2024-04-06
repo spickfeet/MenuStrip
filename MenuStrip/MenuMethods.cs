@@ -8,54 +8,69 @@ namespace MenuStrip
 {
     public class MenuMethods
     {
+        public string Lab()
+        {
+            return "Лабораторные";
+        }
+     
+        public string Prac()
+        {
+            return "Практики";
+        }
+
+        public string Directory()
+        {
+            return "Справочники";
+        }
+
         public string Others()
         {
-            return "Others";
+            return "Разное";
         }
 
         public string Stuff()
         {
-            return "Stuff";
+            return "Сотрудники";
         }
 
         public string Orders()
         {
-            return "Orders";
+            return "Приказы";
         }
 
         public string Docs()
         {
-            return "Docs";
+            return "Документы";
         }
 
         public string Departs()
         {
-            return "Departs";
+            return "Отделы";
         }
 
         public string Towns()
         {
-            return "Towns";
+            return "Города";
         }
 
         public string Posts()
         {
-            return "Posts";
+            return "Должности";
         }
 
         public string Window()
         {
-            return "Window";
+            return "Окно";
         }
 
         public string Content()
         {
-            return "Content";
+            return "Оглавление";
         }
 
         public string About()
         {
-            return "About";
+            return "О программе";
         }
     }
 }
