@@ -19,7 +19,7 @@ namespace ProgPR2
     {
         private IList<IUser> _users = new List<IUser>();
         private IUser _currentUser;
-        private ParserUser _userParser = new("usersConfig.txt");
+        private ParserUser _userParser = new ParserUser("usersConfig.txt");
         System.Windows.Forms.Timer timer1;
         public LogInForm()
         {

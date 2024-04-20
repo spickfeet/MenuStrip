@@ -3,12 +3,17 @@ using MenuStrip.Users;
 using System.Reflection;
 using System.Windows.Forms;
 
+
 namespace MenuStrip
 {
+
     public partial class MainMenu : Form
     {
-        private MenuMethods _menuMethods = new();
+        private static Assembly asm = Assembly.LoadFrom("MenuDLL.dll");
+        private static Assembly asm2 = Assembly.LoadFrom("MenuMethods.dll");
         private Dictionary<string, string> _methods = new Dictionary<string, string>();
+
+
 
         private IList<string[]> _menuConfig = new List<string[]>();
 
@@ -18,11 +23,9 @@ namespace MenuStrip
 
             InitializeComponent();
 
-            ParserMenu parserMenu = new ParserMenu("menuConfigs.txt");
-            IList<string[]> menuConfig = parserMenu.Parse();
+            object menuConfig = asm.GetType("ParserMenu").GetMethod("Parse", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new[] { "menuConfigs.txt" });
 
-            ParserUserMenu parserUserMenu = new ParserUserMenu(userConfigs, menuConfig);
-            _menuConfig = parserUserMenu.Parse();
+            _menuConfig = (IList<string[]>)asm.GetType("ParserUserMenu").GetMethod("Parse", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new[] { userConfigs, menuConfig });
 
             Init();
         }
@@ -119,7 +122,7 @@ namespace MenuStrip
         {
             string keyMethod = (sender as ToolStripMenuItem).Text;
 
-            MessageBox.Show(_menuMethods.GetType().GetMethod(_methods[keyMethod]).Invoke(_menuMethods, null).ToString());
+            MessageBox.Show(asm2.GetType("MyMenuMethods").GetMethod(_methods[keyMethod], BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, null).ToString());
         }
     }
 }
