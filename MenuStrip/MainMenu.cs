@@ -32,6 +32,12 @@ namespace MenuStrip
             Application.Exit();
         }
 
+        /// <summary>
+        /// Создаёт элемент меню вложенный в объект-родитель, проверяя уровень доступа
+        /// </summary>
+        /// <param name="parentItem"></param>
+        /// <param name="levelIndex"></param>
+        /// <param name="i">Текущий индекс цикла</param>
         public void CreateStrip(ToolStripMenuItem parentItem, int levelIndex, ref int i)
         {
             i++;
@@ -42,6 +48,7 @@ namespace MenuStrip
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(_menuConfig[i][1]);
 
                 parentItem.DropDownItems.Add(menuItem);
+
                 if (_menuConfig[i][2] == "2")
                 {
                     menuItem.Visible = false;
@@ -68,6 +75,9 @@ namespace MenuStrip
             }
         }
 
+        /// <summary>
+        /// Создаёт меню пользователя на основе конфига
+        /// </summary>
         public void Init()
         {
             int j = 0;
@@ -93,10 +103,7 @@ namespace MenuStrip
 
                 if (_menuConfig[j][2] == "2") continue;
 
-                if (_menuConfig[j][2] == "1")
-                {
-                    menuItem.Enabled = false;
-                }
+                if (_menuConfig[j][2] == "1") menuItem.Enabled = false;
 
                 if (_menuConfig[i][2] == "0")
                 {
