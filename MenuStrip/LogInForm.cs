@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using MenuStrip.Users;
-using MenuStrip;
-using Microsoft.VisualBasic.ApplicationServices;
+﻿using MenuStrip;
 using MenuStrip.Parsers;
+using MenuStrip.Users;
+using System.Runtime.InteropServices;
 
 
 namespace ProgPR2
@@ -21,6 +12,7 @@ namespace ProgPR2
         private IUser _currentUser;
         private ParserUser _userParser = new("usersConfig.txt");
         System.Windows.Forms.Timer timer1;
+
         public LogInForm()
         {
             InitializeComponent();
@@ -32,6 +24,7 @@ namespace ProgPR2
 
             this.TopMost = true;
         }
+
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr GetKeyboardLayout(int WindowsThreadProcessID);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -42,9 +35,11 @@ namespace ProgPR2
 
 
         private static InputLanguageCollection _InstalledInputLanguages;
-        // Идентификатор активного потока
+
+        // Идентификатор активного потока.
         private static int _ProcessId;
-        // Текущий язык ввода
+
+        // Текущий язык ввода.
         private static string _CurrentInputLanguage;
 
 
@@ -53,14 +48,16 @@ namespace ProgPR2
 
             _InstalledInputLanguages = InputLanguage.InstalledInputLanguages;
 
-            // Получаем хендл активного окна
+            // Получаем хендл активного окна.
             IntPtr hWnd = GetForegroundWindow();
-            // Получаем номер потока активного окна
+
+            // Получаем номер потока активного окна.
             int WinThreadProcId = GetWindowThreadProcessId(hWnd, out _ProcessId);
 
-            // Получаем раскладку
+            // Получаем раскладку.
             IntPtr KeybLayout = GetKeyboardLayout(WinThreadProcId);
-            // Циклом перебираем все установленные языки для проверки идентификатора
+
+            // Циклом перебираем все установленные языки для проверки идентификатора.
             for (int i = 0; i < _InstalledInputLanguages.Count; i++)
             {
                 if (KeybLayout == _InstalledInputLanguages[i].Handle)
@@ -111,11 +108,6 @@ namespace ProgPR2
             {
                 MessageBox.Show("Неверный логин или пароль!!!!!!!!!!!!!!!");
             }
-        }
-
-        private void LogInForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

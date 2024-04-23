@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace MenuStrip.Parsers
 {
@@ -14,7 +9,7 @@ namespace MenuStrip.Parsers
         //проверяем существование файла с заданным путем
         public ParserMenu(string pathConfig)
         {
-            if (!File.Exists(pathConfig)) throw new Exception("File Menu non existent"); 
+            if (!File.Exists(pathConfig)) throw new Exception("File Menu non existent");
 
             _pathConfig = pathConfig;
         }
@@ -27,7 +22,8 @@ namespace MenuStrip.Parsers
 
             using (StreamReader streamReader = new StreamReader(_pathConfig))
             {
-                while (!streamReader.EndOfStream) { 
+                while (!streamReader.EndOfStream)
+                {
                     string line = streamReader.ReadLine();
                     string pattern = @"^(\d+) (.+) (\d+) (.+)$";
                     string pattern2 = @"^(\d+) (.+) (\d+)$";
@@ -44,7 +40,8 @@ namespace MenuStrip.Parsers
                         });
                         }
                     }
-                    if (Regex.IsMatch(line, pattern2)) {
+                    if (Regex.IsMatch(line, pattern2))
+                    {
 
                         foreach (Match match in Regex.Matches(line, pattern2))
                         {
@@ -57,8 +54,6 @@ namespace MenuStrip.Parsers
                     }
                 }
             }
-
-
 
             return strings;
         }

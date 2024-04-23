@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MenuStrip
+﻿namespace MenuStrip
 {
     public class MenuMethods
     {
@@ -12,7 +6,7 @@ namespace MenuStrip
         {
             return "Лабораторные";
         }
-     
+
         public string Prac()
         {
             return "Практики";
