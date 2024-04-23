@@ -11,6 +11,7 @@ namespace MenuStrip.Parsers
     {
         private string _pathConfig;
 
+        //проверяем существование файла с заданным путем
         public ParserMenu(string pathConfig)
         {
             if (!File.Exists(pathConfig)) throw new Exception("File Menu non existent"); 
@@ -19,6 +20,7 @@ namespace MenuStrip.Parsers
         }
 
 
+        // преобразуем строки файла в массивы значений
         public IList<string[]> Parse()
         {
             IList<string[]> strings = new List<string[]>();
