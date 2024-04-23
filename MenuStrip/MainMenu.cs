@@ -1,7 +1,4 @@
 using MenuStrip.Parsers;
-using MenuStrip.Users;
-using System.Reflection;
-using System.Windows.Forms;
 
 namespace MenuStrip
 {
@@ -33,11 +30,11 @@ namespace MenuStrip
         }
 
         /// <summary>
-        /// Создаёт элемент меню вложенный в объект-родитель, проверяя уровень доступа
+        /// Создаёт элемент меню вложенный в объект-родитель, проверяя уровень доступа.
         /// </summary>
         /// <param name="parentItem"></param>
         /// <param name="levelIndex"></param>
-        /// <param name="i">Текущий индекс цикла</param>
+        /// <param name="i">Текущий индекс цикла.</param>
         public void CreateStrip(ToolStripMenuItem parentItem, int levelIndex, ref int i)
         {
             i++;
@@ -49,6 +46,7 @@ namespace MenuStrip
 
                 parentItem.DropDownItems.Add(menuItem);
 
+                // Проверка на уровень доступа.
                 if (_menuConfig[i][2] == "2")
                 {
                     menuItem.Visible = false;
@@ -76,7 +74,7 @@ namespace MenuStrip
         }
 
         /// <summary>
-        /// Создаёт меню пользователя на основе конфига
+        /// Создаёт меню пользователя на основе конфига.
         /// </summary>
         public void Init()
         {
@@ -84,7 +82,6 @@ namespace MenuStrip
             for (int i = 0; i < _menuConfig.Count; i++)
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(_menuConfig[i][1]);
-
 
                 j = i;
 
@@ -119,7 +116,8 @@ namespace MenuStrip
         {
             string keyMethod = (sender as ToolStripMenuItem).Text;
 
-            MessageBox.Show(_menuMethods.GetType().GetMethod(_methods[keyMethod]).Invoke(_menuMethods, null).ToString());
+            MessageBox.Show(_menuMethods.GetType().GetMethod(_methods[keyMethod])
+                .Invoke(_menuMethods, null).ToString());
         }
     }
 }

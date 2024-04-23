@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MenuStrip.Users;
+﻿using MenuStrip.Users;
 
 namespace MenuStrip.Parsers
 {
@@ -13,7 +8,7 @@ namespace MenuStrip.Parsers
 
         public ParserUser(string pathConfig)
         {
-            
+
             if (!File.Exists(pathConfig)) { throw new Exception("File Users non existent"); }
 
             _pathConfig = pathConfig;
