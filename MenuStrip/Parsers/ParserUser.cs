@@ -6,7 +6,7 @@ namespace MenuStrip.Parsers
     {
         private string _pathConfig;
 
-        //проверяем существование файла с заданным путем
+        // Проверяем существование файла с заданным путем.
         public ParserUser(string pathConfig)
         {
 
@@ -16,7 +16,7 @@ namespace MenuStrip.Parsers
         }
 
 
-        // преобразуем строки файла в массивы значений
+        // Преобразуем строки файла в массивы значений.
         public IList<IUser> Parse()
         {
             IList<IUser> listUsers = new List<IUser>();
