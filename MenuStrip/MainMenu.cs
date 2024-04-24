@@ -9,8 +9,7 @@ namespace MenuStrip
 
     public partial class MainMenu : Form
     {
-        private static Assembly asm = Assembly.LoadFrom("MenuDLL.dll");
-        private static Assembly asm2 = Assembly.LoadFrom("MenuMethods.dll");
+        private static Assembly asm = Assembly.LoadFrom("MenuStripBuilderDLL.dll");
         private Dictionary<string, string> _methods = new Dictionary<string, string>();
 
 
@@ -23,9 +22,17 @@ namespace MenuStrip
 
             InitializeComponent();
 
-            object menuConfig = asm.GetType("ParserMenu").GetMethod("Parse", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new[] { "menuConfigs.txt" });
+            Type? t = asm.GetType("MenuStripParser");
+            if (t is not null)
+            {
+                // получаем метод Square
+                MethodInfo? method = t.GetMethod("Parse", BindingFlags.Public | BindingFlags.Static);
 
-            _menuConfig = (IList<string[]>)asm.GetType("ParserUserMenu").GetMethod("Parse", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new[] { userConfigs, menuConfig });
+                // вызываем метод, передаем ему значения для параметров и получаем результат
+                object? menuConfig = method?.Invoke(null, new[] { "menuConfigs.txt" }); ;
+                _menuConfig = (IList<string[]>)asm.GetType("UserMenuParser").GetMethod("Parse", BindingFlags.Public | BindingFlags.Static).Invoke(null, new[] { userConfigs, menuConfig });
+            }         
+
 
             Init();
         }
@@ -122,7 +129,7 @@ namespace MenuStrip
         {
             string keyMethod = (sender as ToolStripMenuItem).Text;
 
-            MessageBox.Show(asm2.GetType("MyMenuMethods").GetMethod(_methods[keyMethod], BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, null).ToString());
+            MessageBox.Show(asm.GetType("MyMenuMethods").GetMethod(_methods[keyMethod], BindingFlags.Public | BindingFlags.Static).Invoke(null, null).ToString());
         }
     }
 }
