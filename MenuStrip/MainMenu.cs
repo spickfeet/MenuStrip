@@ -2,8 +2,7 @@ using MenuStrip.Parsers;
 using MenuStrip.Users;
 using System.Reflection;
 using System.Windows.Forms;
-using MenuMethodsDLL;
-using MenuStripBuilderDLL;
+using MenuStripBuilder;
 
 namespace MenuStrip
 {
