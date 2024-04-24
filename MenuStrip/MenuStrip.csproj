@@ -10,8 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MenuDLL">
-      <HintPath>bin\Debug\net7.0-windows\MenuDLL.dll</HintPath>
+    <Reference Include="MenuMethodsDLL">
+      <HintPath>bin\Debug\net8.0-windows7.0\MenuMethodsDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="MenuStripBuilderDLL">
+      <HintPath>bin\Debug\net8.0-windows7.0\MenuStripBuilderDLL.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -2,19 +2,16 @@ using MenuStrip.Parsers;
 using MenuStrip.Users;
 using System.Reflection;
 using System.Windows.Forms;
-
+using MenuMethodsDLL;
+using MenuStripBuilderDLL;
 
 namespace MenuStrip
 {
 
     public partial class MainMenu : Form
     {
-        private static Assembly asm = Assembly.LoadFrom("MenuDLL.dll");
-        private static Assembly asm2 = Assembly.LoadFrom("MenuMethods.dll");
         private Dictionary<string, string> _methods = new Dictionary<string, string>();
-
-
-
+        
         private IList<string[]> _menuConfig = new List<string[]>();
 
         public MainMenu(IDictionary<string, int> userConfigs)
@@ -23,9 +20,9 @@ namespace MenuStrip
 
             InitializeComponent();
 
-            object menuConfig = asm.GetType("ParserMenu").GetMethod("Parse", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new[] { "menuConfigs.txt" });
+            IList<string[]> menuConfig = MenuStripParser.Parse("menuConfigs.txt");
 
-            _menuConfig = (IList<string[]>)asm.GetType("ParserUserMenu").GetMethod("Parse", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new[] { userConfigs, menuConfig });
+            _menuConfig = UserMenuParser.Parse(userConfigs, menuConfig);
 
             Init();
         }
@@ -121,8 +118,17 @@ namespace MenuStrip
         private void OnClick(object sender, EventArgs e)
         {
             string keyMethod = (sender as ToolStripMenuItem).Text;
+            MyMenuMethods menuMethods = new();
+            Type? t = menuMethods.GetType();
+            if (t is not null)
+            {
+                // получаем метод Square
+                MethodInfo? method = t.GetMethod(_methods[keyMethod]);
 
-            MessageBox.Show(asm2.GetType("MyMenuMethods").GetMethod(_methods[keyMethod], BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, null).ToString());
+                // вызываем метод, передаем ему значения для параметров и получаем результат
+                string? result = method?.Invoke(menuMethods, null).ToString();
+                MessageBox.Show(result);
+            }           
         }
     }
 }
