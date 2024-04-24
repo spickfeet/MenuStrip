@@ -63,6 +63,7 @@
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.Size = new Size(291, 27);
             textBoxPassword.TabIndex = 1;
+            textBoxPassword.UseSystemPasswordChar = true;
             // 
             // labelLogin
             // 
