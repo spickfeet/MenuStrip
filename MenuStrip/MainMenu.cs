@@ -9,7 +9,7 @@ namespace MenuStrip
 
     public partial class MainMenu : Form
     {
-        private static Assembly asm = Assembly.LoadFrom("MenuStripBuilderDLL.dll");
+        private static Assembly asm = Assembly.LoadFrom("MenuStripBuilder.dll");
         private Dictionary<string, string> _methods = new Dictionary<string, string>();
 
 
